@@ -1,6 +1,6 @@
-# MoneyTransfSystem
+# MoneyTransferApplication
 
-MoneyTransfSystem is a web-based system built with **.NET Core 8 MVC** and **SQL Server**. The application facilitates secure money transfers between banks from any location. It includes features such as user registration and login via ASP.NET Identity, customer and bank management, and a transaction process.
+MoneyTransferApplication is a web-based system built with **.NET Core 8 MVC** and **SQL Server**. The application facilitates secure money transfers between banks from any location. It includes features such as user registration and login via ASP.NET Identity, customer and bank management, and a transaction process.
 
 ---
 
