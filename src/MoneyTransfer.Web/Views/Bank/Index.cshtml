@@ -1,0 +1,122 @@
+﻿@model MoneyTransfer.Web.Models.BankViewModel
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="row">
+    <div class="card shadow p-3">
+        <div class="card-body">
+            <div class="d-flex justify-content-end me-3 my-3">
+                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addNewBankModal"> Add New Bank</button>
+            </div>
+            <div>
+                <table class="table table-sm table-hover table-striped table-bordered" id="userIndexDetailTbl">
+                    <thead>
+                        <tr>
+                            <th>S.N</th>
+                            <th>Bank Name</th>
+                            <th>SwiftCode</th>
+                            <th>Description</th>
+                            <th>LocationId</th>
+                            <th>Balance</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{
+                            int sn = 0;
+                        }
+                        @foreach (var bank in ViewBag.AllBank)
+                        {
+                            sn++;
+                            <tr>
+                                <td>@sn</td>
+                                <td>@bank.Name</td>
+                                <td>@bank.SwiftCode</td>
+                                <td>@bank.Description</td>
+                                <td>@bank.LocationId</td>
+                                <td>@bank.Balance</td>
+                                <td>
+                                    <button class="btn btn-sm btn-outline-warning">Edit</button>
+                                    <button class="btn btn-sm btn-outline-danger">Delete</button>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="addNewBankModal" tabindex="-1" role="dialog" aria-labelledby="addNewBankModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addNewBankModalLabel">Add New Bank </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+        <form asp-action="Create" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Description" class="control-label"></label>
+                <input asp-for="Description" class="form-control" />
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SwiftCode" class="control-label"></label>
+                <input asp-for="SwiftCode" class="form-control" />
+                <span asp-validation-for="SwiftCode" class="text-danger"></span>
+            </div>
+                    <!-- Location Fields -->
+                    <fieldset class="row">
+                        <legend>Location Details</legend>
+                        <div class="form-group col-md-4">
+                            <label asp-for="CountryCode" class="control-label"></label>
+                            <input asp-for="CountryCode" class="form-control" />
+                            <span asp-validation-for="CountryCode" class="text-danger"></span>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label asp-for="Country" class="control-label"></label>
+                            <input asp-for="Country" class="form-control" />
+                            <span asp-validation-for="Country" class="text-danger"></span>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label asp-for="CityCode" class="control-label"></label>
+                            <input asp-for="CityCode" class="form-control" />
+                            <span asp-validation-for="CityCode" class="text-danger"></span>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label asp-for="City" class="control-label"></label>
+                            <input asp-for="City" class="form-control" />
+                            <span asp-validation-for="City" class="text-danger"></span>
+                        </div>
+                    </fieldset>
+
+            <div class="form-group">
+                <label for="Balance" class="control-label">Balance</label>
+                <input asp-for="Balance" type="number" class="form-control" />
+                <span asp-validation-for="Balance" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
